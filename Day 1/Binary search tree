@@ -1,0 +1,67 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    private TreeNode copyTree(TreeNode t) {
+        if (t == null) {
+            return null;
+        }
+        TreeNode c = new TreeNode(t.val, null, null);
+        c.left = copyTree(t.left);
+        c.right = copyTree(t.right);
+        return c;
+    }
+    public List<TreeNode> generateTrees(int n) {
+        List<TreeNode> result = new ArrayList<>();
+        if (n == 1) {
+            TreeNode t = new TreeNode(n, null, null);
+            result.add(t);
+            return result;
+        }
+        List<TreeNode> trees = generateTrees(n - 1);
+        for (int i = 0; i < trees.size(); i++) {
+            TreeNode t = trees.get(i);
+            TreeNode go = t;
+            TreeNode H = new TreeNode(0, null, t);
+            while (go != null) {
+                TreeNode t2 = copyTree(t);
+                TreeNode head = new TreeNode(0, null, t2);
+                TreeNode go2 = t2;
+                while (go2.val != go.val) {
+                    go2 = go2.right;
+                    head = head.right;
+                }
+                TreeNode mid = new TreeNode(n, go2, null);
+                if (head.val != 0) {
+                    head.right = mid;
+                    result.add(t2);
+                }
+                else {
+                    result.add(mid);
+                }
+
+                go = go.right;
+                H = H.right;
+                
+            }
+            if (H.val != 0) {
+                H.right = new TreeNode(n, null, null);
+            }
+            result.add(t);
+        }
+        return result;
+
+    }
+}
