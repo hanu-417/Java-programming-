@@ -1,0 +1,16 @@
+class Solution {
+    public int findPairs(final int[] nums, final int k) {
+        final Map<Integer, Integer> counts = new HashMap<>();
+
+        for(final int num : nums)
+            counts.put(num, counts.getOrDefault(num, 0) + 1);
+
+        int count = 0;
+
+        for(final int key : counts.keySet())
+            if((k > 0 && counts.containsKey(key + k)) || (k == 0 && counts.get(key) > 1))
+                count++;
+
+        return count;
+    }
+}
