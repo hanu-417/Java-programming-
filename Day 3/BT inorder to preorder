@@ -1,0 +1,27 @@
+class Solution {
+    public TreeNode solve(int[] inorder,int[] postorder,int inorderstart,int inorderend,int postorderstart,int postorderend){
+            if(inorderstart>inorderend || postorderstart>postorderend)return null;
+
+            int rootvalue=postorder[postorderend];
+            TreeNode root=new TreeNode(rootvalue);
+
+            int inorderindex=inorderstart;
+            while(inorder[inorderindex]!=rootvalue){
+                inorderindex++;
+            }
+
+            int leftsize=inorderindex-inorderstart;
+            root.left=solve(inorder,postorder,
+                            inorderstart,inorderindex-1,
+                            postorderstart,postorderstart+leftsize-1
+                        );
+            root.right=solve(inorder,postorder,
+                            inorderindex+1,inorderend,
+                            postorderstart+leftsize,postorderend-1
+                        );
+            return root;
+        }
+    public TreeNode buildTree(int[] inorder, int[] postorder) {
+        return solve(inorder,postorder,0,inorder.length-1,0,postorder.length-1);
+    }
+}
