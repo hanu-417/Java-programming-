@@ -1,0 +1,27 @@
+class Solution {
+    
+    private Set<List<Integer>> set;     
+    public List<List<Integer>> findSubsequences(int[] nums) {
+        set = new HashSet<>();
+        
+        findSubsequences(nums, 0, new LinkedList<>());
+        return new ArrayList<>(set);    // we return the set as an arraylist
+    }
+    
+    private void findSubsequences(int[] nums, int index, LinkedList<Integer> currList) {
+        
+        if (currList.size() >= 2) {
+            
+            set.add(new ArrayList(currList));   
+        }
+        
+        for (int i = index; i < nums.length; i++) {
+            
+            if (currList.isEmpty() || nums[i] >= currList.getLast()) {
+                currList.add(nums[i]);     
+               
+            }
+        }
+    }
+}
+ly hashset considered
