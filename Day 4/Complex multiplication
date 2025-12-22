@@ -1,0 +1,24 @@
+class Solution {
+    public String complexNumberMultiply(String num1, String num2) {
+        
+        int r1 = Integer.valueOf(num1.substring(0, num1.indexOf('+')));
+        int r2 = Integer.valueOf(num2.substring(0, num2.indexOf('+')));
+
+        int i1 = Integer.valueOf(num1.substring(num1.indexOf('+')+1, num1.indexOf('i')));
+        int i2 = Integer.valueOf(num2.substring(num2.indexOf('+')+1, num2.indexOf('i')));
+
+        StringBuilder ans = new StringBuilder();
+        
+        int last = i1 * i2 * -1;
+        int real = ( r1 * r2 ) + last;
+        ans.append(real+"+");
+
+        int inner = i1 * r2;
+        int outer = r1 * i2;
+        int imag = inner + outer;
+        ans.append(imag+"i");
+
+        return ans.toString();
+
+    }
+}
