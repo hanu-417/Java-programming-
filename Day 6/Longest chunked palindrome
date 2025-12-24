@@ -1,0 +1,32 @@
+class Solution {
+    public int longestDecomposition(String text) {
+        int slipt=0,c=0;
+        int i=0,j=text.length()-1;
+        while(i<j){
+            while(i<j && text.charAt(i)!=text.charAt(j)){
+                j--;
+                c++;
+            }
+            if(i==j) break;
+            String s1=text.substring(j,j+c+1);
+            String s2=text.substring(i,i+c+1);
+            if(s1.compareTo(s2)==0){
+                slipt+=2;
+                 i=i+c+1;
+                j--;
+                c=0;
+            }
+            else{
+                j--;
+                c++;
+            }
+           
+        }
+        if(i==j){
+            slipt++;
+        }
+        return slipt;
+
+        
+    }
+}
