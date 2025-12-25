@@ -1,0 +1,24 @@
+import java.util.Arrays;
+
+class BinarySearch {
+    public static void main(String[] args) {
+        int[] a = {4, 1, 7, 3, 9};
+        int key = 7;
+
+        Arrays.sort(a);
+        int low = 0, high = a.length - 1;
+
+        while (low <= high) {
+            int mid = (low + high) / 2;
+
+            if (a[mid] == key) {
+                System.out.println("Found");
+                return;
+            } else if (a[mid] < key)
+                low = mid + 1;
+            else
+                high = mid - 1;
+        }
+        System.out.println("Not Found");
+    }
+}
