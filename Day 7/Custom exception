@@ -1,0 +1,18 @@
+class AgeException extends Exception {
+    AgeException(String msg) {
+        super(msg);
+    }
+}
+
+class CustomException {
+    static void validate(int age) throws AgeException {
+        if (age < 18)
+            throw new AgeException("Not eligible");
+        else
+            System.out.println("Eligible");
+    }
+
+    public static void main(String[] args) throws AgeException {
+        validate(16);
+    }
+}
