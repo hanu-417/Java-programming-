@@ -1,0 +1,22 @@
+class Solution {
+    public static boolean anagramCheck(String s,String p,int ind){
+        int endInd = ind + p.length();
+        int hash[] = new int[26];
+        for(int i=ind,j=0;i<endInd;i++,j++){
+            hash[s.charAt(i)-'a']++;
+            hash[p.charAt(j)-'a']--;
+        }
+        for(int i=0;i<26;i++){
+            if(hash[i]!=0) return false;
+        }
+        return true;
+    }
+    public List<Integer> findAnagrams(String s, String p) {
+        int len1 = s.length(), len2 = p.length();
+        ArrayList<Integer> arr = new ArrayList<>();
+        for(int i=0;i<=len1-len2;i++){
+            if(anagramCheck(s,p,i)) arr.add(i);
+        }
+        return arr;
+    }
+}
