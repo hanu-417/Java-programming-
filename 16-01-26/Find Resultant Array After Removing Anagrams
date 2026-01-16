@@ -1,0 +1,9 @@
+class Solution {
+    public List<String> removeAnagrams(String[] words) {
+        return IntStream.range(0, words.length)
+            .filter(i -> i == 0 || !Stream.of(words[i].split("")).sorted().collect(Collectors.joining())
+                .equals(Stream.of(words[i - 1].split("")).sorted().collect(Collectors.joining())))
+            .mapToObj(i -> words[i])
+            .collect(Collectors.toList());
+    }
+}
