@@ -1,0 +1,16 @@
+class Solution {
+    public int divisorSubstrings(int num, int k) {
+        int count = 0;
+        int temp = num;
+        int d = (int) Math.pow(10, k);
+        int i = (int) Math.pow(10, k - 1);
+        while (temp >= i) {
+            int n = temp % d;
+            temp = temp / 10;
+            if (n != 0 && num % n == 0) {
+                count++;
+            }
+        }
+        return count;
+    }
+}
