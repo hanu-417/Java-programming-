@@ -1,0 +1,23 @@
+class Solution {
+    public List<Integer> intersection(int[][] nums) {
+
+        HashMap<Integer, Integer> hm = new HashMap<Integer, Integer>();
+        int len = nums.length;
+
+        for(int[] i : nums){
+            for(int j : i){
+                hm.put(j, hm.getOrDefault(j, 0) + 1);
+            }
+        }
+
+        ArrayList<Integer> ans = new ArrayList<Integer>();
+
+        for(Map.Entry<Integer,Integer > e : hm.entrySet()){
+            if( e.getValue() == len){
+                ans.add(e.getKey());
+            }
+        }
+        Collections.sort(ans);
+        return ans;
+    }
+}
