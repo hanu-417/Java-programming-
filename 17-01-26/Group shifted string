@@ -1,0 +1,15 @@
+class Solution {
+    public List<List<String>> groupStrings(String[] strings) {
+        Map<String,List<String>> map = new HashMap<>();
+        for(String s:strings){
+            StringBuilder key = new StringBuilder();
+            for(int i=1;i<s.length();i++){
+                int d = s.charAt(i)-s.charAt(i-1);
+                if(d<0) d+=26;
+                key.append(d).append(',');
+            }
+            map.computeIfAbsent(key.toString(),k->new ArrayList<>()).add(s);
+        }
+        return new ArrayList<>(map.values());
+    }
+}
