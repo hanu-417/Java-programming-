@@ -1,0 +1,23 @@
+class Solution {
+    public int strobogrammaticInRange(String low, String high) {
+        int[] count = new int[1];
+        dfs("", low, high, count);
+        dfs("0", low, high, count);
+        dfs("1", low, high, count);
+        dfs("8", low, high, count);
+        return count[0];
+    }
+
+    void dfs(String s,String low,String high,int[] c){
+        if(s.length()>high.length()) return;
+        if(s.length()>0 &&
+           (s.length()>low.length() || s.compareTo(low)>=0) &&
+           (s.length()<high.length() || s.compareTo(high)<=0))
+            c[0]++;
+
+        for(char[] p:new char[][]{{'0','0'},{'1','1'},{'6','9'},{'8','8'},{'9','6'}}){
+            if(s.length()==0 && p[0]=='0') continue;
+            dfs(p[0]+s+p[1], low, high, c);
+        }
+    }
+}
