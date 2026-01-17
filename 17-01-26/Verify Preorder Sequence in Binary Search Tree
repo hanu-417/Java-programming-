@@ -1,0 +1,14 @@
+class Solution {
+    public boolean verifyPreorder(int[] preorder) {
+        Stack<Integer> st = new Stack<>();
+        int low = Integer.MIN_VALUE;
+
+        for(int n : preorder){
+            if(n < low) return false;
+            while(!st.isEmpty() && n > st.peek())
+                low = st.pop();
+            st.push(n);
+        }
+        return true;
+    }
+}
