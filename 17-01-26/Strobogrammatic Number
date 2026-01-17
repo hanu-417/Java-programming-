@@ -1,0 +1,16 @@
+class Solution {
+    public boolean isStrobogrammatic(String num) {
+        Map<Character,Character> m = new HashMap<>();
+        m.put('0','0'); m.put('1','1'); m.put('6','9');
+        m.put('8','8'); m.put('9','6');
+
+        int l=0,r=num.length()-1;
+        while(l<=r){
+            if(!m.containsKey(num.charAt(l)) ||
+               m.get(num.charAt(l))!=num.charAt(r))
+                return false;
+            l++; r--;
+        }
+        return true;
+    }
+}
