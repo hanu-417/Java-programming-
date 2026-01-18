@@ -1,0 +1,14 @@
+class Solution {
+    int dx=-1,dy=-1,px=-1,py=-1;
+    public boolean isCousins(TreeNode r,int x,int y){
+        dfs(r,null,0,x,y);
+        return dx==dy && px!=py;
+    }
+    void dfs(TreeNode n,TreeNode p,int d,int x,int y){
+        if(n==null) return;
+        if(n.val==x){ dx=d; px=p.val; }
+        if(n.val==y){ dy=d; py=p.val; }
+        dfs(n.left,n,d+1,x,y);
+        dfs(n.right,n,d+1,x,y);
+    }
+}
